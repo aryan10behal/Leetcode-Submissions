@@ -5,7 +5,6 @@ public:
         dp[0] = false;
         for(int i = 1;i<=n;i++)
         {
-            bool a = false;
             dp[i] = false;
             for(int j = 1; j*j<=i;j++)
             {
