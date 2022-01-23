@@ -26,17 +26,17 @@ public:
                 int k = q.front();
                 q.pop();
                 j = 0;
-                int contra = 0;
+                int contradiction = 0;
                 for(int x: statements[k])
                 {
                     if((x == 1 && gd[j]!=1) || (x == 0 && gd[j]==1))
                     {
-                        contra = 1;
+                        contradiction = 1;
                         break;
                     }   
                     j++;
                 }
-                if(contra)
+                if(contradiction)
                 {
                     good = -1e9;
                     break;
