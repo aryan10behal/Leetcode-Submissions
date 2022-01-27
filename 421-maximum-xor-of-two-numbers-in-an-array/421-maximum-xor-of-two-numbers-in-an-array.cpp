@@ -1,78 +1,79 @@
-struct node
-{
+struct node{
     node* left;
     node* right;
 };
-class trie
-{
+class trie{
     node* root;
     public:
-        trie()
+    trie()
+    {
+        root = new node();
+    }
+    void insert(int number)
+    {
+        node* x = root;
+        for(int i = 30;i>=0;i--)
         {
-            root = new node();
-        }
-        void insert(int n)
-        {
-            node* temp = root;
-            for(int i = 30;i>=0;i--)
+            int bit = (number >> i)&1;
+            if(bit == 1)
             {
-                int bit = (n>>i & 1);
-                if(bit == 0)
-                {
-                    if(temp->left==NULL)
-                        temp->left = new node();
-                    temp = temp->left;
-                }
-                else
-                {
-                    if(temp->right==NULL)
-                        temp->right = new node();
-                    temp = temp->right;
-                }
+                if(x->right == NULL)
+                    x->right = new node();
+                x = x->right;
+            }
+            else
+            {
+                if(x->left == NULL)
+                    x->left = new node();
+                x = x->left;
             }
         }
-        int find_max(int n)
+    }
+    int mx(int number)
+    {
+        node* x = root;
+        int val = 0;
+        for(int i = 30;i>=0;i--)
         {
-            node* temp = root;
-            int val = 0;
-            for(int i = 30;i>=0;i--)
+            int bit = (number >> i)&1;
+            if(bit == 1)
             {
-                int bit = (n>>i & 1);
-                if(bit == 0)
+                if(x->left)
                 {
-                    if(temp->right)
-                        {
-                            val+= (1<<i);
-                            temp = temp->right;
-                        }
-                    else
-                        temp = temp->left;
+                    val += 1<<i;
+                    x = x->left;
                 }
                 else
-                {
-                     if(temp->left)
-                        {
-                            val+= (1<<i);
-                            temp = temp->left;
-                        }
-                    else
-                        temp = temp->right;
-                }
+                    x = x->right;           
             }
-            return val;
+            else
+            {
+                if(x->right)
+                {
+                    val += 1<<i;
+                    x = x->right;
+                }
+                else
+                    x = x->left;
+            }
         }
+        return val;
+    }
+    
 };
 class Solution {
 public:
     int findMaximumXOR(vector<int>& nums) {
-        trie* root = new trie();
-        for(int x: nums)
-            root->insert(x);
-        int m = 0;
+        trie* z = new trie();
         for(int x: nums)
         {
-            m = max(root->find_max(x), m);
+            z->insert(x);
         }
-        return m;
+        int ans = 0;
+        for(int x: nums)
+        {
+            ans = max(ans, z->mx(x));
+        }
+        return ans;
     }
 };
