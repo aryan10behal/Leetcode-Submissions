@@ -27,10 +27,8 @@ public:
         while(l<=h)
         {
             mid = (l + h)/2;
-            //cout<<l<<" "<<h<<" "<<mid<<endl;
             if(p(nums, target, mid))
             {
-                //cout<<"YO\n";
                 ans = mid;
                 h  = mid - 1;
             }
