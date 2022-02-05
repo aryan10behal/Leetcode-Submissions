@@ -16,7 +16,7 @@ public:
             return y;
         if(y==NULL)
             return x;
-        ListNode* z = new ListNode(0);
+        ListNode* z;
         ListNode* b = z;
          if(x->val < y->val)
             {
