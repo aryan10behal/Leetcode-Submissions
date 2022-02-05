@@ -6,17 +6,11 @@ public:
         int ans = 1, sum = 0;
         for(int i = 0;i<nums.size();i++)
         {
-            int x = nums[i]%k;
-            sum += x;
-            sum%=k;
+            sum = (sum + nums[i])%k;
             if(m.find(sum)==m.end())
-            {
                 m[sum] = i;
-            }
             else
-            {
                 ans = max(ans, i-m[sum]);
-            }
         }
         return ans == 1? false:true;
     }
