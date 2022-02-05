@@ -12,8 +12,23 @@ class Solution {
 public:
     ListNode* merge(ListNode* x, ListNode* y)
     {
+        if(x==NULL)
+            return y;
+        if(y==NULL)
+            return x;
         ListNode* z = new ListNode(0);
         ListNode* b = z;
+         if(x->val < y->val)
+            {
+                z = x;
+                x = x->next; 
+            }
+            else
+            {
+                z = y;
+                y = y->next;
+            }
+        b = z;
         while(x && y)
         {
             if(x->val < y->val)
@@ -40,7 +55,7 @@ public:
            y = y->next;
            z = z->next;
         }
-        return b->next;
+        return b;
     }
     ListNode* sorting(vector<ListNode*>& lists, int l, int h)
     {
