@@ -102,25 +102,17 @@ int main()
 //Function to find the lowest common ancestor in a BST. 
 pair<bool, bool> trav(Node *root, Node* &ans, int n1, int n2)
 {
-    if(root == NULL)
-        return {false, false};
-    pair<bool, bool> x = trav(root->left, ans, n1, n2);
-    pair<bool, bool> y = trav(root->right, ans, n1, n2);
-    bool a = false | x.first | y.first, b = false | x.second | y.second;
-    if(root->data == n1)
-        a = true;
-    if(root->data == n2)
-        b = true;
-    if(a && b && !ans)
-        ans = root;
-    return {a,b};
+    
 }
 Node* LCA(Node *root, int n1, int n2)
 {
-    Node* ans = NULL;
-    bool a = false, b = false;
-    trav(root, ans, n1, n2);
-    return ans;
+    if(root == NULL)
+        return NULL;
+    if(root->data <= n1 && root->data >= n2 || root->data >=n1 && root->data <= n2)
+        return root;
+    if(root->data <n1 && root->data <n2)
+        return LCA(root->right, n1, n2);
+    return LCA(root->left, n1, n2);
    //Your code here
 }
 
