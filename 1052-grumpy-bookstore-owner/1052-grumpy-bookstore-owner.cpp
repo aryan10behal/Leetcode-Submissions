@@ -32,7 +32,6 @@ public:
             i++, j++;
         }
         int ans = 0;
-        cout<<st<<" "<<en<<endl;
         for(int i = 0;i<n;i++)
         {
             if(g[i] == 0)
