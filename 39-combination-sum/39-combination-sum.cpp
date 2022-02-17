@@ -1,29 +1,27 @@
 class Solution {
 public:
-    void find(vector<vector<int>> &ans, vector<int> &v, vector<int> candidates, int c, int s, int start)
+    vector<vector<int>> x;
+    void isSubsetSum(vector<int> &c, int n, int sum, vector<int> &cur_vec)
     {
-        if(c==s)
+        if(sum == 0)
         {
-            ans.push_back(v);
+            x.push_back(cur_vec);  
             return;
         }
-        if(c>s)
-        {
+        if(sum < 0)
             return;
-        }
-        for(int i=start;i<candidates.size();i++)
-        {
-            c+=candidates[i];
-            v.push_back(candidates[i]);
-            find(ans, v, candidates, c, s, i);
-            v.pop_back();
-            c-=candidates[i];
-        }
+        if (n == -1)
+            return;
+        cur_vec.push_back(c[n]);
+        isSubsetSum(c, n, sum-c[n], cur_vec);
+        cur_vec.pop_back();
+        isSubsetSum(c, n-1, sum, cur_vec);
+        return;
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        vector<vector<int>> ans;
-        vector<int> v;
-        find(ans, v, candidates, 0,target, 0);
-        return ans;
+       vector<int> cur_vec;
+        int n = candidates.size() - 1;
+        isSubsetSum(candidates, n, target, cur_vec);
+        return x;
     }
 };
