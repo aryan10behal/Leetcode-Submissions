@@ -9,34 +9,41 @@ using namespace std;
 
 class Solution{
     public:
-    int dp[101][101];
-    int sf(int i, int j, int freq[]) {
+    int sum(int freq[], int x, int y)
+    {
         int sum = 0;
-        for (int k = i; k <= j; k++) {
-            sum += freq[k];
+        for(int i=x;i<=y;i++)
+        {
+            sum += freq[i];
         }
         return sum;
     }
-    int solve(int freq[],int i,int j){
-        if(i>j)return 0;
-        if (i == j)
-        return dp[i][j] = freq[i];
-        if(dp[i][j]!=-1){
-            return dp[i][j];
-        }
-        int fsum=sf(i,j,freq);
-        int ans=INT_MAX;
-        for(int k=i;k<=j;k++){
-            int temp=solve(freq,i,k-1)+solve(freq,k+1,j);
-            ans=min(temp,ans);
-        }
-        return dp[i][j]=ans+fsum;
-    }
     int optimalSearchTree(int keys[], int freq[], int n)
     {
+        int dp[n][n];
+        for(int i = 0;i<n;i++)
+        {
+            dp[i][i] = freq[i];
+        }
+        for(int l=1;l<=n-1;l++)
+        {
+            for(int i = 0;i<n;i++)
+            {
+                if(i+l >=n)
+                    break;
+                int j = i + l;
+                int mx = 1e9;
+                int s = sum(freq, i, j);
+                //cout<<s<<endl;
+                for(int r = i;r<=j;r++)
+                {
+                    mx = min(mx, ((r>i)?dp[i][r-1]:0) + ((r<j)?dp[r+1][j]:0) + s);
+                }
+                dp[i][j] = mx;
+            }
+        }
+        return dp[0][n-1];
         // code here
-         memset(dp,-1,sizeof(dp));
-        return solve(freq,0,n-1);
     }
 };
 
