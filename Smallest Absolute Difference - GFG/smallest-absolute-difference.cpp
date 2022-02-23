@@ -24,29 +24,36 @@ int main() {
 }
 // } Driver Code Ends
 
-int count(int a[], int n, int mid)
+bool p(int a[], int n, int k, int mid)
 {
-   int number=0;
-   for(int i=0;i<n;i++){
-       number+=upper_bound(a+i,a+n,a[i]+mid)-(a+i+1);
-   }
-   return number;
+    int count = 0;
+    int i = 0, j = 1;
+    while(j<n)
+    {
+        if(abs(a[j] - a[i]) <= mid)
+        {
+            count+= j-i;
+            j++;
+        }
+        else
+            i++;
+    }
+    //cout<<count<<" "<<k<<endl;
+    if(count<k)
+        return true;
+    return false;
 }
-int kthDiff(int a[], int n, int k)
-{
-   sort(a,a+n);
-   int low=a[1]-a[0];
-   for(int i=0;i<n-1;i++){
-       low=min(low,a[i+1]-a[i]);
-   }
-   int high=a[n-1]-a[0];
-   while(low<high){
-       int mid=(low+high)/2;
-       if(count(a,n,mid)<k){
-           low=mid+1;
-       }else{
-           high=mid;
-       }
-   }
-   return low;
+int kthDiff(int a[], int n, int k) {
+    sort(a, a + n);
+    int low = 0, high = a[n - 1] - a[0], ans = 0;
+    while (low < high) {
+        int mid = (low + high) / 2;
+        //cout << low << " " << mid << " " << high << endl;
+        if (p(a, n, k, mid))
+            low = mid + 1;
+        else
+            high = mid;
+
+    }
+    return low;
 }
