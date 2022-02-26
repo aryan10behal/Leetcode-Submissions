@@ -1,5 +1,7 @@
 class Solution {
 public:
+    int ans = 1e9;
+   
     int shortestPathLength(vector<vector<int>>& graph) {
         int n = graph.size(), steps = 0, endmask = (1<<n) - 1;
         if(n == 1)
