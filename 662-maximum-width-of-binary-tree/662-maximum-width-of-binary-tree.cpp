@@ -11,44 +11,34 @@
  */
 class Solution {
 public:
-   
-    int widthOfBinaryTree(TreeNode* root) {
-         if(root == NULL)
-            return 0;
-        
-        int res = 1;
-        queue<pair<TreeNode*, int>> q;
-        
-        // I am using intialising list
-        q.push({root, 0});      // also can use make_pair
-        
-        while(!q.empty())
+    void inorder(TreeNode* root, vector<long long> &l, vector<long long> &r, long long lvl, long long x)
+    {
+        if(root == NULL)
+            return;
+        if(l.size() <= lvl)
         {
-            int cnt = q.size();
-            // start is the index of root node for first level
-            int start = q.front().second;
-            int end = q.back().second;
-            
-            res = max(res,end-start + 1);
-            
-            cout<<start<<" "<<end<<endl;
-            for(int i = 0; i <cnt; ++i)
-            {
-                pair<TreeNode*, int> p = q.front();
-                int idx = p.second - start;
-                
-                q.pop();
-                
-                // if  left child exist
-                if(p.first->left != NULL)
-                    q.push({p.first->left, (long long)2 * idx + 1});
-                
-                // if right child exist
-                if(p.first->right != NULL)
-                    q.push({p.first->right, (long long) 2 * idx + 2});
-            }
+            l.push_back(x);
+            r.push_back(x);
         }
-        
-        return res;
+        else
+        {
+            l[lvl] = min(l[lvl], x);
+            r[lvl] = max(r[lvl], x);
+        }
+        x -= l[lvl];
+        inorder(root->left, l, r, lvl+1, 2*x);
+        inorder(root->right, l, r, lvl+1, 2*x+1);
+    }
+    int widthOfBinaryTree(TreeNode* root) {
+        vector<long long> l, r;
+        long long lvl = 0, rightness = 0;
+        inorder(root, l, r, lvl, rightness);
+        long long ans = 0;
+        for(int i=0;i<l.size();i++)
+        {
+            //cout<<l[i]<<" "<<r[i]<<endl;
+            ans = max(ans, r[i]-l[i]+1);
+        }
+        return ans;
     }
 };
