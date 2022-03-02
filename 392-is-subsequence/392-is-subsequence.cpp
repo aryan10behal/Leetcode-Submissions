@@ -5,20 +5,14 @@ public:
         int n = t.size();
         if(m>n)
             return false;
-        int dp[m+1][n+1];
-        memset(dp, 0, sizeof(dp));
-        for(int i=1;i<=m;i++)
+        int i = 0, j=0;
+        while(i<m && j<n)
         {
-            for(int j=1;j<=n;j++)
-            {
-                if(s[i-1] == t[j-1])
-                    dp[i][j] = dp[i-1][j-1]+1;
-                else
-                {
-                    dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
-                }
-            }
+            if(s[i] == t[j])
+                i++, j++;
+            else
+                j++;
         }
-        return dp[m][n] == m?true:false;
+        return i==m?true:false;
     }
 };
