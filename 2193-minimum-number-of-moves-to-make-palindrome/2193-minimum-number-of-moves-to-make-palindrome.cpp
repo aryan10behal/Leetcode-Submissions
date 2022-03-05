@@ -30,10 +30,6 @@ int swapCount(string str){
 }
     int minMovesToMakePalindrome(string s) {
        int ans1 = swapCount(s);
-        reverse(s.begin(), s.end());
-        int ans2 = swapCount(s);
-        sort(s.begin(), s.end());
-        cout<<ans1<<" "<<ans2<<endl;
-        return  max(ans1, ans2);
+        return  ans1;
     }
 };
