@@ -10,24 +10,18 @@ using namespace std;
 class Solution{
     public:
     vector<vector<int>> computeBeforeMatrix(int n, int m, vector<vector<int>> after){
-        vector<vector<int>> ans(n, vector<int>(m));
-        ans[0][0] = after[0][0];
-        for(int i = 1;i<n;i++)
-        {
-            ans[i][0] = after[i][0] - after[i-1][0]; 
-        }
-        for(int j = 0;j<m;j++)
-        {
-            ans[0][j] = after[0][j] - after[0][j-1];
-        }
-        for(int i=1;i<n;i++)
-        {
-            for(int j=1;j<m;j++)
-            {
-                ans[i][j] = after[i][j] - (after[i][j-1] + after[i-1][j] -after[i-1][j-1]);
-            }
-        }
-        return ans;
+       for(int i = n-1; i >=1; i--)
+       {
+           for(int j = m-1;j>=1;j--)
+           {
+               after[i][j] -= (after[i-1][j] + after[i][j-1] - after[i-1][j-1]);
+           }
+       }
+        for(int i = n-1; i>=1; i--)
+            after[i][0] -= after[i-1][0];
+        for(int j = m-1;j>=1;j--)
+            after[0][j] -= after[0][j-1];
+        return after;
     }
 };
 
