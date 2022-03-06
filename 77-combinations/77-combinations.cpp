@@ -1,10 +1,20 @@
 class Solution {
 public:
+    int find_bits(int x)
+    {
+        int c = 0;
+        while(x)
+        {
+            x&=(x-1);
+            c++;
+        }
+        return c;
+    }
     vector<vector<int>> combine(int n, int k) {
         vector<vector<int>> ans;
         for(int i = 0;i<(1<<n);i++)
         {
-            if(__builtin_popcount(i) != k)
+            if(find_bits(i) != k)
                 continue;
             vector<int> x;
             for(int j = 0;j<n;j++)
