@@ -8,9 +8,7 @@ public:
         {
             k--;
             if(k == 0)
-            {
                 ans = v;
-            }
             return;
         }
         for(int i = l;i<h;i++)
@@ -22,6 +20,8 @@ public:
             }
             sort(v.begin()+l+1, v.end());
             permute(v, k, l+1, h, ans);
+            if(k<0)
+                return;
             sort(v.begin()+l+1, v.end());
             {
                 char s = v[i];
