@@ -34,9 +34,7 @@ public:
         string v = "";
         string ans = "";
         for(int i=1;i<=n;i++)
-        {
             v += (i+'0');
-        }
         permute(v, k, 0, n, ans);
         return ans;
     }
