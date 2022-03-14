@@ -7,23 +7,31 @@ using namespace std;
 //User function Template for C++
 class Solution{
     public:
-    int count(int n, vector<int> a,int x)
+    int count(int N, vector<int> A,int X)
     {
-       int prefix=0,ans=n;
-        for(int i=30;i>=0;i--){
-            if(((x>>i)&1)!=0){
-                prefix^=(1l<<i);
-                continue;
-            }
-            int ct=0;
-            long p=prefix^(1l<<i);
-            for(int j=0;j<n;j++){
-                if((a[j]&p)==p)
-                    ct++;
-            }
-            ans=min(ans,n-ct);
-        }
-        return ans;
+       int mask = 0;
+       int ans;
+       ans = N;
+       for(int i=31;i>=0;i--)
+       {
+           if((X>>i)&1)
+           {
+               mask^=(1ll<<i);
+               continue;
+           }
+           
+           int ct=0;
+           int alt_mask=mask^(1ll<<i);
+           for(auto &j:A)
+           {
+               if((j&alt_mask)==alt_mask)
+               {
+                   ct++;
+               }
+           }
+           ans = min(ans,N-ct);
+       }
+       return ans;
     }
 };
 
