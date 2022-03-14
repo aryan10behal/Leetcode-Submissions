@@ -5,16 +5,34 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
   public:
-    void trav(vector<vector<int>> &graph, int s, vector<bool> &vis)
+    bool find(vector<vector<int>> &graph, int s, vector<int> &disc, vector<int> &low, vector<int> &parent, int &time)
     {
+        disc[s] = low[s] = ++time;
+        int children = 0;
         for(int x: graph[s])
         {
-            if(!vis[x])
+            if(disc[x] == -1)
             {
-                vis[x] = true;
-                trav(graph, x, vis);
+                children++;
+                parent[x] = s;
+                if(find(graph, x, disc, low, parent, time))
+                    return true;
+                low[s] = min(low[s], low[x]);
+                if(parent[s] == -1)
+                {
+                    if(children>1)
+                        return true;
+                }
+                else
+                {
+                    if(low[x] > disc[s])
+                        return true;
+                }
             }
+            else if (x != parent[s])
+                low[s]  = min(low[s], disc[x]);
         }
+        return false;
     }
     int biGraph(int arr[], int n, int e) {
         vector<vector<int>> graph(n, vector<int>());
@@ -23,25 +41,16 @@ class Solution {
             graph[arr[i]].push_back(arr[i+1]);
             graph[arr[i+1]].push_back(arr[i]);
         }
-        for(int i = 0;i<n;i++)
+        vector<int> disc(n,-1);
+        vector<int> low(n, 1e9);
+        vector<int> parent(n, -1);
+        int time = 0;
+        if(find(graph, 0, disc, low, parent, time))
+            return false;
+        for(int i=0;i<n;i++)
         {
-            for(int j: graph[i])
-            {
-                vector<bool> vis(n, false);
-                vis[i] = true;
-                vis[j] = true;
-                trav(graph, i, vis);
-                for(int k = 0;k<n;k++)
-                {
-                    // cout<<k<<":"<<vis[k]<<" ";
-                    if(!vis[k])
-                    {
-                        //cout<<i<<" "<<k<<endl;
-                        return false;
-                    }
-                }
-                //cout<<endl;
-            }
+            if(disc[i] == -1)
+                return false;
         }
         return true;
     }
