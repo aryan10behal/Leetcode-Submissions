@@ -43,7 +43,6 @@ public:
                           else
                               break;
                       }
-                      cout<<iter<<" "<<val<<endl;
                       i  = iter;
                   }
                 else
@@ -68,7 +67,6 @@ public:
         }
         if(ans == "")
             ans.push_back('/');
-        //cout<<"$$$";
         return ans;
     }
 };
