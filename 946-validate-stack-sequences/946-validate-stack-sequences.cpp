@@ -16,9 +16,7 @@ public:
                 }
             }
             else
-            {
                 st.push(pushed[i]);
-            }
         }
         if(st.size() and j != pushed.size())
             return false;
