@@ -14,10 +14,7 @@ public:
         for(int i = 0;i<6;i++)
         {
             if(arr[i]+arr2[i] - arr3[i] >= n)
-            {
-                cout<<n-arr[i]<<" "<<n-arr2[i]<<endl;
                 ans = min(ans, min(n-arr[i], n-arr2[i]));
-            }
         }
         return ans == 1e9? -1: ans;
     }
