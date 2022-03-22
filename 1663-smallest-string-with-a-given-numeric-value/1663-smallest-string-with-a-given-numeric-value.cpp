@@ -6,10 +6,9 @@ public:
         string ans = "";
         while(n)
         {
-            int can_add = min(26, k - (n-1));
+            char can_add = min(26, k - ((n--)-1));
             k-=can_add;
-            ans += (char)(can_add+'a'-1);
-            n--;
+            ans += (can_add + 96);
         }
         reverse(ans.begin(), ans.end());
         return ans;
