@@ -7,7 +7,7 @@ public:
         }
     };
     int largestValsFromLabels(vector<int>& values, vector<int>& labels, int numWanted, int useLimit) {
-        map<int, vector<int>> m;
+        unordered_map<int, vector<int>> m;
         int n = values.size();
         for(int i = 0;i<n;i++)
             m[labels[i]].push_back(values[i]);
