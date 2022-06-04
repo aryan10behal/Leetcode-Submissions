@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void nqueens(vector<vector<string>> &ans, vector<string> &y, int r, int n, int l, string &f, string &g, string &h)
+    void nqueens(vector<vector<string>> &ans, vector<string> &y, int r, int n, int l, string &columns, string &diag1, string &diag2)
     {
         if(r == n)
         {
@@ -9,58 +9,54 @@ public:
         }
         for(int i = l+2;i<n;i++)
         {
-            if(f[i] == '.' and g[r-i + n - 1] == '.' and h[i+r] == '.')
+            if(columns[i] == '.' and diag1[r-i + n - 1] == '.' and diag2[i+r] == '.')
             {
                 y[r][i] = 'Q';
-                f[i] = 'Q';
-                g[r-i + n - 1] = 'Q';
-                h[i+r] = 'Q';
+                columns[i] = 'Q';
+                diag1[r-i + n - 1] = 'Q';
+                diag2[i+r] = 'Q';
                // cout<<r<<" "<<f<<endl;
-                nqueens(ans, y, r+1, n, i, f, g, h);
-                f[i] = '.';
-                h[i+r] = '.';
-                g[r-i + n - 1] = '.';
+                nqueens(ans, y, r+1, n, i, columns, diag1, diag2);
+                columns[i] = '.';
+                diag2[i+r] = '.';
+                diag1[r-i + n - 1] = '.';
                 y[r][i] = '.';
             }
         }
         for(int i = l-2;i>=0;i--)
         {
-            if(f[i] == '.' and g[r-i + n - 1] == '.' and h[i+r] == '.')
+            if(columns[i] == '.' and diag1[r-i + n - 1] == '.' and diag2[i+r] == '.')
             {
                 y[r][i] = 'Q';
-                f[i] = 'Q';
-                g[r-i + n - 1] = 'Q';
-                h[i+r] = 'Q';
+                columns[i] = 'Q';
+                diag1[r-i + n - 1] = 'Q';
+                diag2[i+r] = 'Q';
                 //cout<<r<<" "<<f<<endl;
-                nqueens(ans, y, r+1, n, i, f, g, h);
-                h[i+r] = '.';
-                f[i] = '.';
-                g[r-i + n - 1] = '.';
+                nqueens(ans, y, r+1, n, i, columns, diag1, diag2);
+                diag2[i+r] = '.';
+                columns[i] = '.';
+                diag1[r-i + n - 1] = '.';
                 y[r][i] = '.';
             }
         }
     }
     vector<vector<string>> solveNQueens(int n) {
-        string f(n, '.');
-        string g(2*n-1, '.');
-        string h(2*n-1, '.');
-        string x(n, '.');
-        vector<string> y(n, x);
+        string columns(n, '.');
+        string diag1(2*n-1, '.');
+        string diag2(2*n-1, '.');
+        vector<string> y(n, string(n, '.'));
         vector<vector<string>> ans;
         for(int i=0;i<n;i++)
         {
             y[0][i] = 'Q';
-            f[i] = 'Q';
-            g[-i+n-1] =  'Q';
-            h[i] = 'Q';
-            
-            //cout<<y[0]<<endl;
-            nqueens(ans,y, 1, n, i, f, g, h);
-            f[i] = '.';
-            g[-i+n-1] =  '.';
+            columns[i] = 'Q';
+            diag1[-i+n-1] =  'Q';
+            diag2[i] = 'Q';
+            nqueens(ans,y, 1, n, i, columns, diag1, diag2);
+            columns[i] = '.';
+            diag1[-i+n-1] =  '.';
             y[0][i] = '.';
-            h[i] = '.';
-            //cout<<endl<<endl;
+            diag2[i] = '.';
         }
         //cout<<ans.size()<<endl;
         return ans;
