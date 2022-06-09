@@ -17,7 +17,7 @@ public:
             return {-1001, 0};
         pair<int, int> a = trav(root->left, ans);
         pair<int, int> b = trav(root->right, ans);
-        int c = 1, d = 0, e = 1;
+        int d = 0, e = 1;
         if(a.first == root->val)
         {
             d = a.second;
@@ -28,9 +28,8 @@ public:
             d = max(d, b.second);
             e += b.second;
         }
-        c+=d;
         ans = max(ans, e);
-        return {root->val, c};
+        return {root->val, d+1};
     }
     int longestUnivaluePath(TreeNode* root) {
         if(root == NULL)
