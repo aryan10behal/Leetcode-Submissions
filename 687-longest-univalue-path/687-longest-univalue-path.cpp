@@ -29,9 +29,7 @@ public:
             e += b.second;
         }
         c+=d;
-        ans = max(ans, c);
         ans = max(ans, e);
-        //cout<<root->val<<" "<<c<<endl;
         return {root->val, c};
     }
     int longestUnivaluePath(TreeNode* root) {
