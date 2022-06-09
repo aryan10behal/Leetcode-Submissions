@@ -2,7 +2,7 @@ class Solution {
 public:
     int findTheLongestSubstring(string s) {
         unordered_map<int, int> m;
-        map<char, int> xx;
+        unordered_map<char, int> xx;
         xx['a'] = 0;
         xx['e'] = 1;
         xx['i'] = 2;
