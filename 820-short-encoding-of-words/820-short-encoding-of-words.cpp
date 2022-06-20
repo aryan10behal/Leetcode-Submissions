@@ -5,6 +5,8 @@ public:
         vector<int> dis_set(n, -1);
         for(int i = 0; i<n;i++)
         {
+            if(dis_set[i]!=-1)
+                continue;
             for(int j = i+1;j<n;j++)
             {
                 if(dis_set[i] == -1 or dis_set[j] == -1)
@@ -18,7 +20,6 @@ public:
                     }
                     if(x == -1 or y == -1)
                     {
-                        //cout<<words[i]<<" "<<words[j]<<endl;
                         if(x == -1)
                             dis_set[i] = j;
                         else
@@ -32,7 +33,6 @@ public:
         {
             if(dis_set[i] == -1)
             {
-                //cout<<words[i]<<" ";
                 ans+=words[i].size()+1;
             }
         }
