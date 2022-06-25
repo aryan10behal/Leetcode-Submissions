@@ -19,7 +19,9 @@ public:
                  p|=1;
              if(xx[i] > xx[i+1])
                  q|=1;
+            if((p&q)==1)
+                return false;
         }
-        return (p&q==1)?false:true;
+        return true;
     }
 };
