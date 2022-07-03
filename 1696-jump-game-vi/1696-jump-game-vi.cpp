@@ -20,13 +20,11 @@ public:
                 pair<int, int> x = pq.top();
                 if(x.second >= i - k)
                 {
-                    mx = max(mx, x.first);
+                    mx = x.first;
                     break;
                 }
                 else
-                {
                     pq.pop();
-                }
             }
             dp[i] = nums[i] + mx;
             pq.push({dp[i], i});
