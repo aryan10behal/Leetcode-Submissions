@@ -6,26 +6,20 @@ public:
             return 1;
         queue<int> q;
         vector<int> candies(n, 0);
-        if(ratings[0] == ratings[1])
-            candies[0] = 1;
-        else if(ratings[0] < ratings[1])
+        if(ratings[0] <= ratings[1])
         {
             candies[0] = 1;
             q.push(0);
         }
-        if(ratings[n-1] == ratings[n-2])
-            candies[n-1] = 1;
-        else if(ratings[n-1] < ratings[n-2])
+        if(ratings[n-1] <= ratings[n-2])
         {
             candies[n-1] = 1;
             q.push(n-1);
         }
-        vector<int> vis(n, 1);
         for(int i = 1;i<n-1;i++)
         {
             if(ratings[i] <= ratings[i-1] and ratings[i] <= ratings[i+1])
             {
-                vis[i] = 0;
                 candies[i] = 1;
                 q.push(i);
             }
