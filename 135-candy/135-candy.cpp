@@ -58,7 +58,6 @@ public:
         int ans = 0;
         for(int i = 0;i<n;i++)
         {
-            cout<<candies[i]<<" ";
             ans += candies[i];
         }
         return ans;
