@@ -13,17 +13,14 @@ public:
         }
         for(int i = 0;i<n;i++)
         {
-            //cout<<arr[i]<<endl;
             for(int j = 0;j<i;j++)
             {
                 if(arr[i]%arr[j] == 0 and m.find(arr[i]/arr[j]) != m.end())
                 {
-                   //cout<<"-->"<<arr[j]<<" ";
                     ways[arr[i]] += ((ways[arr[j]]*ways[arr[i]/arr[j]])%mod);
                     ways[arr[i]]%=mod;
                 }
             }
-           // cout<<" #"<<ways[arr[i]]<<endl;
             ans = (ans + ways[arr[i]])%mod;
         }
         return ans%mod;
