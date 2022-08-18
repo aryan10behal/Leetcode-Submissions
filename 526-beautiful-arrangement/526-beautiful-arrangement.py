@@ -1,16 +1,14 @@
 class Solution:
-    def countArrangement(self, N: int) -> int:
-        states = set([i for i in range(1, N+1)])
-        count = 0
-        def helper(curr, i, states):
-            if curr % i != 0 and i % curr != 0:
-                return
-            if len(states) == 0:
-                nonlocal count
-                count += 1
-            for num in states:
-                helper(num, i+1, states-set([num]))
-
-        for i in states:
-            helper(i, 1, states-set([i]))
-        return count
+    def countArrangement(self, n: int) -> int:
+        self.output = 0
+        
+        def backtrack(perm, i):
+            if i == n + 1:
+                self.output += 1
+            else:
+                for j in range(1, n + 1):
+                    if j not in perm and (not perm or j % i == 0 or i % j == 0):
+                        backtrack(perm + [j], i + 1)
+                        
+        backtrack([], 1)
+        return self.output
