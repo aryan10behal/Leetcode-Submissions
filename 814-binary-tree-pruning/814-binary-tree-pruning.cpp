@@ -21,16 +21,11 @@ public:
             root->left = NULL;
         if(y == 0)
             root->right = NULL;
-        if(root->val == 1)
-            return 1;
-        return x + y;
+        return x + y + (root->val == 1);
     }
     TreeNode* pruneTree(TreeNode* root) {
         if(root == NULL)
             return root;
-        int x = prune(root);
-        if(x == 0)
-            return NULL;
-        return root;
+        return prune(root) == 0?NULL:root;
     }
 };
