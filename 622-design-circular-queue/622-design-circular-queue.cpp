@@ -16,7 +16,9 @@ public:
     bool deQueue() {
         if(q.size() == 0)
             return false;
-        q.erase(q.begin());
+        reverse(q.begin(),q.end());
+        q.pop_back();
+        reverse(q.begin(),q.end());
         return true;
     }
     
