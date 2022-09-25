@@ -6,8 +6,7 @@ public:
         while(i<n)
         {
             val += (s[i++]=='R'?1:-1);
-            if(val == 0)
-                ans++;
+            ans += (val == 0?1:0);
         }
         return ans;
     }
