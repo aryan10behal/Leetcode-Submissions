@@ -4,10 +4,7 @@ public:
         int mask = 0;
         int n = cells.size();
         for(int i = 0;i<n;i++)
-        {
             mask += (cells[i]<<(n-i-1));
-        }
-        //cout<<mask<<endl;
         unordered_map<int, int> mp;
         mp[mask] = 0;
         int turns = 0, f = 0;
@@ -17,7 +14,6 @@ public:
             for(int i = 1;i<n-1;i++)
                 val += ((!(((mask>>(i-1))&1) ^ ((mask>>(i+1))&1)))<<i);
             mask = val;
-            //cout<<mask<<endl;
             turns++;
             if(mp.find(mask) != mp.end())
             {
@@ -37,9 +33,7 @@ public:
             m--;
         }
         for(int i = 0;i<n;i++)
-        {
             cells[n-i-1] = ((mask>>i)&1);
-        }
         return cells;
     }
 };
