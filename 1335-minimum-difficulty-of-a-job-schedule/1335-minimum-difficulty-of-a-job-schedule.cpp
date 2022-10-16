@@ -8,18 +8,6 @@ public:
             segtree[i] = max(segtree[2 * i],
                              segtree[2 * i + 1]);
     }
- 
-    void update(vector<int>& segtree, int pos, int value,int n)
-    {
-        pos += n;
-        segtree[pos] = value;
-
-        while (pos > 1) {
-            pos >>= 1;
-            segtree[pos] = max(segtree[2 * pos], segtree[2 * pos + 1]);
-        }
-    }
- 
     int range_query(vector<int>& segtree, int left, int right, int n)
     {
         left += n;
