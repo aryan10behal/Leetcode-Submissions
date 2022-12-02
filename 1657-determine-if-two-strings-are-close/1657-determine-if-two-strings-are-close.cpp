@@ -13,12 +13,6 @@ public:
         }
         sort(x.begin(),x.end());
         sort(z.begin(),z.end());
-        for(int i=0;i<26;i++)
-        {
-            // cout<<x[i]<<" "<<z[i]<<endl;
-            if(x[i]!=z[i])
-                return false;
-        }
-        return true;
+        return x==z;
     }
 };
